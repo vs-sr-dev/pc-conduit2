@@ -59,6 +59,49 @@ sample times `CONDUIT2_MOUSE` (0.15), clamped to ±1; the cursor captured by
 wiikit's relative mouse. Mouse look works; the stick's ±1 caps how fast the
 view turns, which the direct way (below) removes.
 
+## Session 3: the Classic Controller in wiikit
+
+All of the above moved into wiikit (`wpad.cpp`, `video.cpp`), game-agnostic:
+
+* **A game declares it plays with the Classic** (`wpad_set_classic(true)`):
+  each channel's Remote then holds one wherever `video_classic(chan)` has
+  one, dev_type 2, data_format 8, `ex_status.cl` at 0x60 (the Remote itself
+  points nowhere and presses nothing).
+* **Connections from the runtime**: the KPAD and WPAD connect callbacks and
+  WPAD's extension callback are kept per channel and called after VI's
+  interrupt (`__VIRetraceHandler`, hooked: the Bluetooth stack's callbacks
+  come from an interrupt too), or at the game's next read or probe, at
+  least 0.2 s after registration, and again whenever a channel's controller
+  comes or goes (connect with `WPAD_ERR_NO_CONTROLLER` on unplugging).
+  The port's `GXDrawDone` hook is gone.
+* **Gamepads** (SDL3's `SDL_Gamepad`): each takes the lowest free channel
+  as it is plugged in and keeps it. Triggers ZL/ZR (the Classic Pro's
+  place), shoulders L/R (analog reported full), Start +, Back -, guide
+  Home, d-pad; face buttons by position (Nintendo: the right one is A) or,
+  with `Face Buttons = Label`, by the pad's labels; a radial dead zone
+  (0.15, `Dead Zone`). The Remote's motor (`WPADControlMotor`) rumbles the
+  channel's pad.
+* **Channel 1 merges** the keys and mouse buttons of the key file's
+  `[Classic Controller]` section with the first pad: buttons OR'd, each
+  stick from whichever source is deflected more (never summed).
+  `--input pad|keyboard` or `Input =` in the key file force one source;
+  with `keyboard` the pads start at channel 2.
+* The port's layer keeps only the mouse: a filter
+  (`wpad_set_classic_filter`) adds its motion to channel 1's right stick.
+
+Played by the user with an Xbox One pad (SDL: "Xbox One Controller",
+xboxone): movement, look, fire, confirm all right at the first try, with
+the keyboard and mouse live at the same time. Aiming (ZL) turns slower:
+the game's own aim sensitivity.
+
+**Split-screen** (`--input keyboard`: the keys and the mouse on channel
+1, the pad on channel 2): the game's local multiplayer, played by the user,
+player 1 on WASD and the mouse, player 2 on the pad, independent. (The
+first try put the pad on channel 1 anyway: `INPUT_KEYBOARD` is a macro of
+`windows.h`; wiikit `b9db60f` renamed the modes.) Not tried yet: a pad
+unplugged and plugged back while playing (the game should be told of
+channel 2's disconnection).
+
 ## The scheme for the PC
 
 The user's brief: the left stick on WASD, the right stick on the mouse.

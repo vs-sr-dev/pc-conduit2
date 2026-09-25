@@ -122,3 +122,45 @@ Results:
 Left: fog type 2 not drawn; stutters when something new first appears (shader
 programs compiled on first use); the black screen seen once more in one
 session and never again in six runs.
+
+## Session 3 — gamepads, and the Classic Controller in wiikit
+
+Goal (`07-next-session.md` of session 2, item 1): SDL gamepads as the
+Classic Controller in wiikit, keyboard, mouse and pad at once, ready for
+the next port (a JRPG played with a pad). Done, played by the user.
+
+Results:
+
+* **The Classic Controller moved into wiikit** (`5a004bf`, `08-input.md`):
+  a game declares it (`wpad_set_classic`); KPAD's Classic status on every
+  channel that has one; the connect and extension callbacks called by the
+  runtime after VI's interrupt (`__VIRetraceHandler`) or at the next read,
+  0.2 s after registration, and on every plug and unplug; SDL3 gamepads as
+  Classic Controllers, a channel each; the key file's `[Classic
+  Controller]` section; channel 1 merges the keys, the mouse buttons and
+  the first pad (buttons OR'd, the stick deflected more); `--input
+  auto|pad|keyboard`; the Remote's motor on the pad.
+* **The port's layer** keeps only the mouse, as a filter adding its motion
+  to channel 1's right stick; its Classic emulation, its WPAD hooks and the
+  `GXDrawDone` announcement are gone.
+* **The pad**: an Xbox One controller (SDL: "Xbox One Controller",
+  xboxone). The user played: movement, look, fire, confirm right at the
+  first try, WASD and the mouse live alongside. Face buttons by position
+  (the Classic's A is the pad's right button: Xbox B confirms);
+  `Face Buttons = Label` in the key file for the other way.
+* **Split-screen**: with `--input keyboard` (keys and mouse channel 1, the
+  pad channel 2) the game's local multiplayer played by the user, two
+  players independent. The first try found a Windows macro:
+  `INPUT_KEYBOARD` is `winuser.h`'s, so "keyboard" meant "pad" (wiikit
+  `b9db60f`: `INPUT_MODE_*`).
+* **The sister ports**: Victorious gets one hook slot more, self-test 15
+  of 15, to its first episode as before; DQS's C++ unchanged, to its
+  menus. Called, DQS's own connect callback started WPAD's sampling and
+  crashed in a WPAD alarm: the callbacks are for Classic games only. Both
+  now rumble a pad with the Remote's motor (DQS does, in its menus).
+  Submodules moved (Victorious `2c5023b`, `86a676f`; DQS `2941518`,
+  `2bb90f2`).
+
+Left: a pad unplugged and plugged back mid-game not yet tried; the rest
+of session 2's list (fog, first-use stutter, uncapped mouse look, the
+Classic layout from the controls screen).

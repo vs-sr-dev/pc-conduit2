@@ -3,8 +3,6 @@
 #     python -m wiikit.recomp build/extract/sys/main.dol --out build/recomp \
 #         --symbols build/names.tsv --hooks tools/conduit2-hooks.txt
 
-GXDrawDone             # once a frame on the game's thread: the Remote's connection is announced here
-
 # strat natives traced with CONDUIT2_TRACE=1 (the WAD streamer the front end waits on)
 strat_SetStartWad
 strat_SetStartWadI

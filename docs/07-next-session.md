@@ -1,46 +1,31 @@
-# TODO — session 3
+# TODO — session 4
 
-The game plays to its first level with WASD and the mouse (session 2).
-Its colours are right (the grading pass, wiikit `cb99bf8`). Next: the input
-made proper (first: a fourth port, Arc Rise Fantasia, a JRPG, wants a pad),
-then fog and smoothness.
+The game plays to its first level with WASD and the mouse, with a gamepad,
+or with both at once, and in split-screen (session 3). The Classic
+Controller and gamepads are wiikit's now (`5a004bf`, `b9db60f`), ready for
+the next port (Arc Rise Fantasia, pad-first), which may well come before
+this session. Next here: fog and smoothness, then the mouse made proper.
 
-1. **Gamepads and the Classic Controller in wiikit** (decided with the
-   user): SDL3's `SDL_Gamepad` (XInput, DualShock/DualSense, Switch Pro:
-   no new dependency) as the Classic Controller: sticks, d-pad, face
-   buttons, shoulders and triggers; rumble (`WPADControlMotor` ->
-   `SDL_RumbleGamepad`); pads on channels 1-4 as they are plugged in,
-   raising KPAD's connect and extension events from the runtime; the key
-   file gaining the Classic's buttons and sticks as the keyboard fallback;
-   confirm/cancel positional (Nintendo) by default, by label as an option.
-   **Keyboard+mouse and pad at once, no choice to make** (the user's point:
-   today's Classic is fed from keyboard and mouse): channel 1 merges the
-   keyboard, the mouse and the first pad — buttons OR'd, each stick from
-   whichever source is deflected more (WASD and the stick never summed),
-   the mouse adding to the view; pads 2-4 on channels 2-4 (split-screen).
-   An option (`--input auto|pad|keyboard`, or the key file) forces one
-   source; `auto`, the merge, is the default.
-   The port's layer then keeps only the mouse's part. Test with a real pad
-   in Conduit (and its split-screen); check on Victorious and DQS as ever.
-   Details below (item 4) and in `08-input.md`.
-2. **Fog** (`gx: fog (not drawn), type 2`): wiikit's shader generator, with
+1. **Fog** (`gx: fog (not drawn), type 2`): wiikit's shader generator, with
    Dolphin's frame beside. DQS needs it too.
-3. **Stutters on first sight** of something new: count programs linked per
+2. **Stutters on first sight** of something new: count programs linked per
    frame (`WIIKIT_PERF`); a program cache on disk (GL program binaries), or
    compiling the shaders a WAD needs while it loads. Game-agnostic: wiikit.
-4. **(Part of 1.) The Classic Controller into wiikit** (`08-input.md`): KPAD's Ex status,
-   the connect and extension events from the runtime, key-file entries for
-   the Classic's buttons and sticks, SDL gamepads as real Classic
-   Controllers. Then the port's layer keeps only the mouse-to-view part.
-5. **Mouse look without the stick's cap**: find where the player's yaw and
+3. **Mouse look without the stick's cap**: find where the player's yaw and
    pitch take the right stick (`strat_ControllerAnalogRX/RY` callers, the
    player strat's turning natives), add the mouse's motion there, degrees
    per count. `WIIKIT_ICALLS` on a frame in play shows the natives the
-   player strat calls.
-6. **The Classic layout**: the game's controls screen (or its options) in
-   Dolphin with the Classic profile; the key map follows it.
-7. The black screen seen once in session 2 (after a save existed, with
-   audio), never again in six runs: watch for it; if it returns,
+   player strat calls. Then `mouse_on_right_stick` (`tools/conduit2.cpp`)
+   goes.
+4. **The Classic layout and remapping**: the game's controls screen (or its
+   options) in Dolphin with the Classic profile; the key file's defaults
+   follow it. The user wants a remapping of their own later (pad buttons
+   too: today the pad's map is fixed but for `Face Buttons`).
+5. **A pad unplugged and plugged back mid-game**, not yet tried: channel 2
+   in split-screen should be told of the disconnection (the game's
+   "reconnect" notice), and the pad come back on the same channel.
+6. The black screen seen once in session 2 (after a save existed, with
+   audio), never again since: watch for it; if it returns,
    `CONDUIT2_TRACE=1` shows the streamer's state.
 
 Build as in session 1 (`00-sessions.md`), with the port's hooks:
@@ -49,14 +34,17 @@ Build as in session 1 (`00-sessions.md`), with the port's hooks:
     python -m wiikit.recomp build/extract/sys/main.dol --out build/recomp \
         --symbols build/names.tsv --hooks tools/conduit2-hooks.txt
     ninja -C build/recomp-build
-    build/recomp-build/wiiboot build/extract --symbols build/names.tsv
+    build/recomp-build/wiiboot build/extract --symbols build/names.tsv [--input auto|pad|keyboard]
 
-Keys (the port's layer, a guess until the controls screen is read): WASD
-move, mouse look, left button ZR, right button ZL, Enter/Space A, Backspace
-or C B, R X, F Y, E R, Left Shift L, Tab +, Q -, H Home, arrows the d-pad;
-Esc the pause box (frees the mouse), F12 a GX trace.
+Controls: a gamepad (triggers ZL/ZR, shoulders L/R, Start +, Back -, guide
+Home; face buttons by position, the right one A), and the key file's
+`[Classic Controller]` (`build/keys.txt` has none: wiikit's defaults, WASD
+the left stick, mouse left ZR, right ZL, Enter/Space A, Backspace or C B,
+R X, F Y, E R, Left Shift L, Tab +, Q -, H Home, arrows the d-pad; the
+mouse's motion the right stick). Esc the pause box (frees the mouse), F12
+a GX trace. Split-screen: `--input keyboard` puts the pads from channel 2.
 
-Housekeeping: wiikit is pushed up to `cb99bf8` (its last three commits'
-messages reworded before publishing so that no private port is named; the
-trees unchanged). The ports' own commits are local: Conduit 2's whole
-history; Victorious `0bc90fa`..`82901f9`; DQS `bcbd779`..`304d36f`.
+Housekeeping: wiikit is pushed up to `cb99bf8`; `5a004bf` and `b9db60f`
+are local (audited: no private port named), for the user to push. The
+ports' own commits are local: Conduit 2's whole history; Victorious up to
+`86a676f`; DQS up to `2bb90f2`.
