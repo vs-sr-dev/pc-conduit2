@@ -4,3 +4,27 @@
 #         --symbols build/names.tsv --hooks tools/conduit2-hooks.txt
 
 GXDrawDone             # once a frame on the game's thread: the Remote's connection is announced here
+
+# strat natives traced with CONDUIT2_TRACE=1 (the WAD streamer the front end waits on)
+strat_SetStartWad
+strat_SetStartWadI
+strat_SetSharedWad
+strat_SetSharedWadI
+strat_WadLoaded
+strat_StreamingIdle
+strat_StreamWad
+strat_StreamWad2
+strat_StreamWadI
+strat_SuspendWad
+strat_StreamingNANDResult
+strat_StreamWadNAND
+strat_StreamWadNAND2
+strat_StreamWadNANDI
+
+# NAND completion, traced with CONDUIT2_TRACE=1
+nandOpenCallback
+cNandReader_onDone
+
+# skinning, traced with CONDUIT2_TRACE=1
+vSkinStub
+vSetSkinGQRs

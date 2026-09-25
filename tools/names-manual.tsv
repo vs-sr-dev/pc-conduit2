@@ -1,2 +1,11 @@
 addr	name	evidence
 801C7820	KPADReadEx	li r7,1; b KPADiRead (801C7830, matched to Victorious's ELF): KPADRead is not linked, the game reads through the Ex form
+8001C82C	cWadStreamer_start	sprintf("%s%s", name, ".gcs"), NANDGetHomeDir/NANDChangeDir("patch"), the reader's open; state 4, or 6 while a NAND open is pending
+8001CD64	cWadStreamer_update	polls the current reader's status (vtable +0x20) every frame
+80021308	cWadStreamer_isIdle	state 4 and no pending counters: what strat StreamingIdle returns
+8015DA28	cNandReader_open	vtable 805AFC44 +8: NANDOpenAsync with callback 8015D8E4, result at +0x178, status 1
+8015D8E4	cNandReader_nandCallback	the NAND completion callback given by cNandReader_open (Victorious's ELF matched it as cXyz::normalize: a false positive)
+8015E01C	cNandReader_status	vtable +0x20: returns +4
+8015E02C	cNandReader_onDone	result at +0x178; -12 (NAND_RESULT_NOEXISTS) tolerated in status 6, else error status 0xB
+8004F6F0	vSkinStub	loads "Unsupported Skinning Vertex Format (Put breakpoint in vSkinStub() in GCNSkin.cpp...)"
+8004F6E0	vSetSkinGQRs	mtspr GQR4, GQR5, GQR6 from r3, r4, r5

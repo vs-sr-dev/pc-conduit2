@@ -43,6 +43,14 @@ python -m wiikit.recomp build/extract/sys/main.dol --out build/recomp \
 
 ## Status
 
+Session 2: **the game plays.** The black screen after the legal notices
+was a race in wiikit's IOS (a NAND lookup for downloaded patches); past it,
+the logos, the title, the menus, a profile, the prologue and the first
+level, played by the user with WASD and the mouse (a Classic Controller fed
+from the keyboard and mouse; the cursor captured). Characters, skinned on
+the CPU into MEM2, were half missing until three GP FIFO bugs in wiikit
+were fixed. Left: purple tones, fog, stutters on new shaders.
+
 Session 1: **analysis, plan, first light.** The disc is mapped (265 WADs,
 Bink movies). The executable is stripped but its SDK is Victorious's own
 build: 4 846 functions named (2 575 by the script engine's own tables,

@@ -46,11 +46,18 @@ Session 1's experiment (`tools/conduit2.cpp`, `tools/conduit2-hooks.txt`):
    `KPADSetConnectCallback` it crashed (the game's tables not yet set);
    called from `GXDrawDone` ten frames later it runs.
 
-Result: the calls land ("channel 0 connected", "Classic Controller
-attached"), but **the message stays, and the game still never polls**. Next
-(`07-next-session.md`): read the connect callback's channel-0 path
-(80015C80…), what it sets and what the manager's update (8010E210) tests
-before reading; compare with Dolphin with an emulated Classic Controller.
+Session 1 thought this was not enough, because the message stayed. It
+was: the message is a fixed notice of the boot (Dolphin shows it too with a
+Classic Controller attached), and the game only seemed deaf because it was
+stuck on a NAND race (`00-sessions.md`, session 2). With it fixed, the
+user played the menus and the first level.
+
+Session 2 feeds the Classic's status from SDL in the port's layer
+(`classic_from_host`): buttons from keys and mouse buttons, the left stick
+from WASD (0.707 on diagonals), the right stick from the mouse's motion per
+sample times `CONDUIT2_MOUSE` (0.15), clamped to ±1; the cursor captured by
+wiikit's relative mouse. Mouse look works; the stick's ±1 caps how fast the
+view turns, which the direct way (below) removes.
 
 ## The scheme for the PC
 

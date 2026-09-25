@@ -33,3 +33,6 @@ __pycache__/
 *.bik
 *.amf
 *.retail
+gxtrace_*.txt
+drawlog.txt
+efb_*.png

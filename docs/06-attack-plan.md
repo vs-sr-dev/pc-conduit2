@@ -51,26 +51,23 @@ names from `names.tsv`. New here:
 | 0 | **Analysis** ✅ | disc, executable, libraries, controls, route (session 1) |
 | 1 | **Code map** ✅ (session 1) | 4 846 names; every hook target linked here resolved (`KPADReadEx`, `KPADInitEx` new) |
 | 2 | **Recompiler** ✅ compiles and links (session 1); the self-test to port | 19 421 units, 173 files, no error; the native self-test through `names.tsv` |
-| 3 | **Boot** 🟡 to the legal notices (session 1) | `__start` to the main loop ✅; the black screen after the notices; the Bink logos; the title |
-| 4 | **Input foundations** 🟡 experiment (session 1) | the Classic Controller connected as the game expects; "controller required" gone; the title and the menus driven from the keyboard |
-| 5 | **Graphics** | the front end (Scaleform over a 3D background, `99_99`), the Bink movies, the first level (the oil rig, `01_xx`); TEV breadth, indirect water, fog, DOF, bloom against Dolphin |
+| 3 | **Boot** ✅ to the first level (session 2: the IOS race) | `__start` to the main loop ✅; the black screen after the notices; the Bink logos; the title |
+| 4 | **Input foundations** 🟡 played with WASD and the mouse through the port's layer (session 2); into wiikit next | the Classic Controller connected as the game expects; "controller required" gone; the title and the menus driven from the keyboard |
+| 5 | **Graphics** 🟡 the front end, movies and the oil rig draw; skinned characters whole (session 2); purple tones, fog | the front end (Scaleform over a 3D background, `99_99`), the Bink movies, the first level (the oil rig, `01_xx`); TEV breadth, indirect water, fog, DOF, bloom against Dolphin |
 | 6 | **Audio** | the engine's AAL on AX: effects and music from the WADs' RIFF/DSP-ADPCM, Bink's sound, Pro Logic II |
 | 7 | **Mouse and keyboard** | WASD on the left stick; the mouse on the aim (stick first, then the view angles directly); buttons on keys and mouse; a key file. Target: **the oil rig played with mouse and keyboard** |
 | 8 | **PC finish** | 16:9 (native), resolution, saves in the NAND, English/French/Spanish, the online menus failing cleanly, local split-screen on SDL gamepads |
 
 Phases 4–7 interleave once the title is up, as they did in Victorious and
 DQS. Estimate: **eight to ten sessions** to the campaign played with mouse
-and keyboard. The weight is in phase 5 (the renderer) and in the black
-screen of phase 3, whose cause is not yet known.
+and keyboard. The weight is in phase 5 (the renderer).
 
 ## Known risks
 
-* **The black screen after the legal notices** (`05-open-questions.md`):
-  the main loop runs (400 frames a second, no frame limiter), no file is
-  read after the Home Button's, the Bink logos are never opened. Suspects,
-  in order: controllers (the game never polls them in that phase, even with
-  a connection announced), WiiConnect24 (`/dev/net/kd` missing), the save
-  check (the NAND is never touched). Dolphin shows what should come next.
+* ~~The black screen after the legal notices~~: an IOS race, fixed in
+  session 2 (`00-sessions.md`). Timing races between the recompiled game
+  and the runtime's devices remain the class of bug to suspect when a
+  screen waits forever: the console's hardware is never instantaneous.
 * **Renderer breadth.** Conduit 2 pushes the TEV harder than anything
   wiikit has drawn: expect indirect textures for water and refraction, many
   TEV stages, EFB copies for bloom and DOF (146 000 already in the boot),
