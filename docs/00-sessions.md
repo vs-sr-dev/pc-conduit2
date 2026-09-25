@@ -28,7 +28,7 @@ Results:
   `KPADRead` is not linked; the game reads with `KPADReadEx`.
 * **Recompiled, compiled, linked** at the first try: 19 421 units, no
   gaps, 175 switch tables, 173 files of C++, no error.
-* **Booted** after one fix, in wiikit (`1168fd6`): `KPADInitEx` ran the
+* **Booted** after one fix, in wiikit (`a07e7ab`): `KPADInitEx` ran the
   real KPAD into an unstarted WPAD. With `KPADInitEx` and `KPADReadEx`
   hooked, the game runs from `__start` through `OSInit`, the static
   constructors, AX, to its main loop and draws, in 16:9: the Wii Strap
@@ -44,7 +44,7 @@ Results:
 * **The plan** (`06-attack-plan.md`): Victorious's route; eight phases,
   eight to ten sessions to the campaign played with mouse and keyboard;
   the mouse first as the right stick, then straight into the view.
-* **wiikit** (`10-wiikit.md`): `1168fd6`, checked on both other ports
+* **wiikit** (`10-wiikit.md`): `a07e7ab`, checked on both other ports
   (Victorious self-test 15/15 and booted to its first episode; DQS
   unchanged, booted to its menus); their submodules moved on.
 
@@ -62,7 +62,7 @@ Results:
   SEGA logos (Bink), then the title "Press A to Continue" over a 3D
   canyon. "A Nunchuk or Classic Controller is required" shows in Dolphin
   too: a fixed notice, not a complaint.
-* **The black screen was a race in IOS** (wiikit `2733ba3`). Found through
+* **The black screen was a race in IOS** (wiikit `a66e681`). Found through
   what the front-end script waits on (`WIIKIT_ICALLS`, new: indirect calls
   counted by target, which names the strat natives it calls every frame:
   `StreamingIdle`, `WadLoaded`, `StreamingNANDResult`), then the WAD
@@ -87,7 +87,7 @@ Results:
   the turn rate.
 * **Characters were half missing, then exploding** — three wiikit bugs
   in how the GP FIFO and the write-gather pipe work, none of which
-  Victorious or DQS had reached (`2733ba3`). The engine skins models on
+  Victorious or DQS had reached (`a66e681`). The engine skins models on
   the CPU (`GCNSkin.cpp`, a table of five paired-single routines,
   805A6190) straight into the gather pipe redirected to a buffer in MEM2
   (`GXRedirectWriteGatherPipe`), and records display lists in MEM2:
@@ -101,7 +101,7 @@ Results:
      (triangles "exploding from the centre of the screen").
   Found with F12 (new: the next frame's GX commands to a file) pressed by
   the user in front of a character. Confirmed whole by the user.
-* wiikit `2733ba3` and `2216cd4` checked on both ports (Victorious self-test 15 of 15
+* wiikit `a66e681` and `cb99bf8` checked on both ports (Victorious self-test 15 of 15
   and frame for frame to its first episode; DQS to its menus); their
   submodules moved on (Victorious `ca1a9b5`, `befa664`; DQS `84426ea`,
   `d6cb24b`).
@@ -115,7 +115,7 @@ Results:
   offset, masked by a konst colour (K0 red, K1 green, K2 blue). Red comes
   from an R8 copy; green and blue from one GB8 copy read as IA8, green as
   its intensity and blue as its alpha. wiikit's copy shader had RG8 and
-  GB8 the other way round (wiikit `2216cd4`). The menu "fixed" it by
+  GB8 the other way round (wiikit `cb99bf8`). The menu "fixed" it by
   switching the grading off. Confirmed by the user: right everywhere,
   menus and game; the game's grading now applies from the start.
 

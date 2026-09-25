@@ -1,7 +1,7 @@
 # TODO — session 3
 
 The game plays to its first level with WASD and the mouse (session 2).
-Its colours are right (the grading pass, wiikit `2216cd4`). Next: fog,
+Its colours are right (the grading pass, wiikit `cb99bf8`). Next: fog,
 smoothness, and the input made proper.
 
 1. **Fog** (`gx: fog (not drawn), type 2`): wiikit's shader generator, with
@@ -37,7 +37,7 @@ move, mouse look, left button ZR, right button ZL, Enter/Space A, Backspace
 or C B, R X, F Y, E R, Left Shift L, Tab +, Q -, H Home, arrows the d-pad;
 Esc the pause box (frees the mouse), F12 a GX trace.
 
-Housekeeping: wiikit `1168fd6`, `2733ba3` and `2216cd4` are local, not pushed;
+Housekeeping: wiikit `a07e7ab`, `a66e681` and `cb99bf8` are local, not pushed;
 Victorious `0bc90fa`, `ca1a9b5`, `befa664` and DQS `bcbd779`, `84426ea`,
 `d6cb24b` bump their
 submodules, local. Push when the user says so.
