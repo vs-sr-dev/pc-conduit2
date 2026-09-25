@@ -22,7 +22,7 @@ legal notices, AX running, 16:9 from SYSCONF.
 | `2733ba3` | the PI FIFO's pointers keep MEM2 (bits 0-28) and wrap only at the end; `mtspr WPAR` empties the gather buffer; IOS replies no sooner than 50 us after the request, or at once when the CPU idles; F12 GX trace; `WIIKIT_ICALLS`; opt-in relative mouse; `--mmio-log` logs failed opens and every ioctl | Victorious: C++ changed at one `mtspr WPAR`, self-test 15/15, frame for frame to its first episode. DQS: one `mtspr WPAR`, to its menus |
 
 The sister ports moved their submodule each time (Victorious `0bc90fa`,
-`ca1a9b5`; DQS `bcbd779`, `84426ea`; local commits).
+`ca1a9b5`, `befa664`; DQS `bcbd779`, `84426ea`, `d6cb24b`; local commits).
 
 ## What it will give wiikit
 

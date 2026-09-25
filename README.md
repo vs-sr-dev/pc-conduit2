@@ -49,7 +49,9 @@ the logos, the title, the menus, a profile, the prologue and the first
 level, played by the user with WASD and the mouse (a Classic Controller fed
 from the keyboard and mouse; the cursor captured). Characters, skinned on
 the CPU into MEM2, were half missing until three GP FIFO bugs in wiikit
-were fixed. Left: purple tones, fog, stutters on new shaders.
+were fixed; its colour grading was green-for-blue until RG8/GB8 EFB copies
+were. Left: fog, stutters on new shaders, mouse look without the stick's
+cap.
 
 Session 1: **analysis, plan, first light.** The disc is mapped (265 WADs,
 Bink movies). The executable is stripped but its SDK is Victorious's own

@@ -101,13 +101,24 @@ Results:
      (triangles "exploding from the centre of the screen").
   Found with F12 (new: the next frame's GX commands to a file) pressed by
   the user in front of a character. Confirmed whole by the user.
-* wiikit `2733ba3` checked on both ports (Victorious self-test 15 of 15
+* wiikit `2733ba3` and `2216cd4` checked on both ports (Victorious self-test 15 of 15
   and frame for frame to its first episode; DQS to its menus); their
-  submodules moved on (Victorious `ca1a9b5`, DQS `84426ea`).
+  submodules moved on (Victorious `ca1a9b5`, `befa664`; DQS `84426ea`,
+  `d6cb24b`).
 
-Left: purple, CGA-like tones where warm yellow lights should be (the user,
-against memory of the game; not the IA8 palettes, not the EFB copies'
-channels, not the indirect coordinates: to be compared with Dolphin);
-fog type 2 not drawn; stutters when something new first appears (shader
+* **Purple where the lights are yellow** (the user's screenshots: yellow
+  pipes magenta, the sky unchanged: green and blue swapped; right again
+  once the pause menu is *opened*). A differential trace (F12 before and
+  after the menu, standing still) showed one pass only in the purple
+  frame: a full-screen colour grading of 8 TEV stages and 3 indirect
+  stages, each channel looked up in a curve texture through an indirect
+  offset, masked by a konst colour (K0 red, K1 green, K2 blue). Red comes
+  from an R8 copy; green and blue from one GB8 copy read as IA8, green as
+  its intensity and blue as its alpha. wiikit's copy shader had RG8 and
+  GB8 the other way round (wiikit `2216cd4`). The menu "fixed" it by
+  switching the grading off. Confirmed by the user: right everywhere,
+  menus and game; the game's grading now applies from the start.
+
+Left: fog type 2 not drawn; stutters when something new first appears (shader
 programs compiled on first use); the black screen seen once more in one
 session and never again in six runs.

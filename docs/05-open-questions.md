@@ -42,8 +42,8 @@
 10. **Split-screen**: up to four local players; how many Classic
     Controllers the manager takes, and whether SDL gamepads can feed
     channels 1–3.
-11. **The purple tones** where the game's lights are warm yellow (session
-    2): what draws them, against Dolphin (`07-next-session.md` 1).
+11. ~~The purple tones~~: RG8/GB8 EFB copies with swapped channels, read
+    by the colour grading (session 2, wiikit `2216cd4`).
 12. **The black screen seen once more** in session 2, with a save present
     and audio on; six runs after it went through. A second race, or the
     first one's margin?
