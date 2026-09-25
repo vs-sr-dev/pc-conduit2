@@ -37,7 +37,7 @@ move, mouse look, left button ZR, right button ZL, Enter/Space A, Backspace
 or C B, R X, F Y, E R, Left Shift L, Tab +, Q -, H Home, arrows the d-pad;
 Esc the pause box (frees the mouse), F12 a GX trace.
 
-Housekeeping: wiikit `a07e7ab`, `a66e681` and `cb99bf8` are local, not pushed;
-Victorious `0bc90fa`, `ca1a9b5`, `befa664` and DQS `bcbd779`, `84426ea`,
-`d6cb24b` bump their
-submodules, local. Push when the user says so.
+Housekeeping: wiikit is pushed up to `cb99bf8` (its last three commits'
+messages reworded before publishing so that no private port is named; the
+trees unchanged). The ports' own commits are local: Conduit 2's whole
+history; Victorious `0bc90fa`..`82901f9`; DQS `bcbd779`..`304d36f`.
