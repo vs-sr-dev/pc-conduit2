@@ -1,0 +1,2 @@
+addr	name	evidence
+801C7820	KPADReadEx	li r7,1; b KPADiRead (801C7830, matched to Victorious's ELF): KPADRead is not linked, the game reads through the Ex form

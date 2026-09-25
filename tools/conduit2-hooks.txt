@@ -1,0 +1,6 @@
+# Conduit 2: the functions tools/conduit2.cpp replaces, on top of
+# wiikit/runtime/hooks.txt:
+#     python -m wiikit.recomp build/extract/sys/main.dol --out build/recomp \
+#         --symbols build/names.tsv --hooks tools/conduit2-hooks.txt
+
+GXDrawDone             # once a frame on the game's thread: the Remote's connection is announced here
