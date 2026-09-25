@@ -13,6 +13,13 @@ then fog and smoothness.
    raising KPAD's connect and extension events from the runtime; the key
    file gaining the Classic's buttons and sticks as the keyboard fallback;
    confirm/cancel positional (Nintendo) by default, by label as an option.
+   **Keyboard+mouse and pad at once, no choice to make** (the user's point:
+   today's Classic is fed from keyboard and mouse): channel 1 merges the
+   keyboard, the mouse and the first pad — buttons OR'd, each stick from
+   whichever source is deflected more (WASD and the stick never summed),
+   the mouse adding to the view; pads 2-4 on channels 2-4 (split-screen).
+   An option (`--input auto|pad|keyboard`, or the key file) forces one
+   source; `auto`, the merge, is the default.
    The port's layer then keeps only the mouse's part. Test with a real pad
    in Conduit (and its split-screen); check on Victorious and DQS as ever.
    Details below (item 4) and in `08-input.md`.
