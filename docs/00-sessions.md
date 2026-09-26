@@ -103,8 +103,8 @@ Results:
   the user in front of a character. Confirmed whole by the user.
 * wiikit `a66e681` and `cb99bf8` checked on both ports (Victorious self-test 15 of 15
   and frame for frame to its first episode; DQS to its menus); their
-  submodules moved on (Victorious `ca1a9b5`, `befa664`; DQS `84426ea`,
-  `d6cb24b`).
+  submodules moved on (Victorious `3df589a`, `d8ce10b`; DQS `39ea570`,
+  `aa45577`).
 
 * **Purple where the lights are yellow** (the user's screenshots: yellow
   pipes magenta, the sky unchanged: green and blue swapped; right again
@@ -158,8 +158,8 @@ Results:
   menus. Called, DQS's own connect callback started WPAD's sampling and
   crashed in a WPAD alarm: the callbacks are for Classic games only. Both
   now rumble a pad with the Remote's motor (DQS does, in its menus).
-  Submodules moved (Victorious `2c5023b`, `86a676f`; DQS `2941518`,
-  `2bb90f2`).
+  Submodules moved (Victorious `b492489`, `19997a8`; DQS `cde8c05`,
+  `b7bcbb3`).
 
 Left: a pad unplugged and plugged back mid-game not yet tried; the rest
 of session 2's list (fog, first-use stutter, uncapped mouse look, the

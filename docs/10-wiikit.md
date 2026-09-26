@@ -23,9 +23,9 @@ legal notices, AX running, 16:9 from SYSCONF.
 | `5a004bf` | **the Classic Controller**: `wpad_set_classic`, KPAD's Classic status on every channel that has one; SDL3 gamepads as Classic Controllers (a channel each as plugged in; triggers ZL/ZR, face buttons by position or label, dead zone); channel 1 the key file's `[Classic Controller]` keys and mouse buttons merged with the first pad; `--input auto\|pad\|keyboard`; the connect and extension callbacks called after `__VIRetraceHandler` or at the next read (Classic games only); the Remote's motor on the pad; `wpad_set_classic_filter` for a port's mouse | this game played by the user with an Xbox One pad and keys+mouse at once. Victorious: one hook slot more (`__VIRetraceHandler`), self-test 15/15, to the Auditions episode as before. DQS: C++ unchanged, to its menus (its own connect callback, when called, started WPAD's sampling and crashed: hence Classic games only) |
 | `b9db60f` | the input modes renamed `INPUT_MODE_*`: `windows.h`'s `INPUT_KEYBOARD` made `--input keyboard` mean `pad` | split-screen played (keys+mouse on channel 1, the pad on channel 2); Victorious 15/15 and its episode, DQS its menus |
 
-The sister ports moved their submodule each time (Victorious `0bc90fa`,
-`ca1a9b5`, `befa664`, `2c5023b`, `86a676f`; DQS `bcbd779`, `84426ea`,
-`d6cb24b`, `2941518`, `2bb90f2`; local commits).
+The sister ports moved their submodule each time (Victorious `ce21ffe`,
+`3df589a`, `d8ce10b`, `b492489`, `19997a8`; DQS `e04ad30`, `39ea570`,
+`aa45577`, `cde8c05`, `b7bcbb3`).
 
 ## What it will give wiikit
 

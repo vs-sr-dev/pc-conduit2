@@ -9,3 +9,38 @@ addr	name	evidence
 8015E02C	cNandReader_onDone	result at +0x178; -12 (NAND_RESULT_NOEXISTS) tolerated in status 6, else error status 0xB
 8004F6F0	vSkinStub	loads "Unsupported Skinning Vertex Format (Put breakpoint in vSkinStub() in GCNSkin.cpp...)"
 8004F6E0	vSetSkinGQRs	mtspr GQR4, GQR5, GQR6 from r3, r4, r5
+# The runtime's hooks named here, so that names.py alone (natives and this file, no Victorious
+# ELF, no signatures) names every one the build needs. The first 24 only Victorious's symbolised
+# ELF names (elfmatch.py, word for word: the same Aug 23 2010 SDK build), Dolphin's database
+# none of them; the last 7 both. "(Dolphin's)" marks a neighbour Dolphin's database names.
+801665A0	OSLoadContext	follows OSSaveContext (Dolphin's); lmw of the GPRs, the GQRs (mtspr 913..919), SRR0/SRR1 and rfi: the one function a thread switch returns through
+8016DF90	OSCreateThread	between OSYieldThread and OSExitThread (Dolphin's), as in OSThread.c; 0x26C bytes, sets up a context under OSDisableInterrupts
+801634F0	PPCHalt	sync; nop; li r3,0; nop; a branch to itself: the processor stopped, where OSPanic ends; before PPCMffpscr (Dolphin's)
+80168EE0	OSFatal	calls __OSCallShutdownFunctions, EXILock/EXIUnlock and OSSwitchFiber (Dolphin's): the error screen drawn from a fibre of its own; called by the DVD's and NAND's fatal-message code
+8016B9B0	RealMode	clrlwi r3,r3,2 to SRR0, MSR without IR/DR to SRR1, rfi: a jump to r3 with translation off (BATConfig's)
+8016C030	__OSReboot	calls __OSBootDol (Dolphin's); its only caller is OSRestart
+8016C3C0	OSShutdownSystem	after __OSCallShutdownFunctions (Dolphin's), in OSReset.c; calls SCInit, __OSReadStateFlags and __OSUnRegisterStateEvent (Dolphin's)
+8016C4E0	OSRestart	"OSReset.c", "__OSHotReset(): Falied to reset system.\n"; calls __OSReboot
+8017B8C0	__VIRetraceHandler	VI's interrupt handler (0x80C bytes): reads VI's interrupt register (CC002030); calls __VISetFilter4EURGB60, __VISetCGMS, __VISetClosedCaption, __VISetRGBModeImm (Dolphin's); installed, never called
+801A9FFC	__write_console	MSL's console output, between strchr and scalbn (Dolphin's): the console type, then the UART's init and write
+801BE270	nandOpenCallback	between nandComposePerm and nandRemoveTailToken (Dolphin's): NAND's open completion, the IOS result through nandConvertErrorCode
+801C4540	KPADIsEnableAimingMode	returns byte +0x649 of the channel's 0x688-byte KPAD work (806EB068 + chan * 0x688)
+801C4630	KPADGetSensorHeight	returns float +0x128 of the channel's 0x688-byte KPAD work (806EB068 + chan * 0x688)
+801C8050	KPADInitEx	KPAD's init in this SDK (KPADInit is not linked): calls WPADInit, then fills the four channels' KPAD work
+801C86C0	KPADSetConnectCallback	(chan, callback): stores the callback between OSDisableInterrupts and OSRestoreInterrupts
+801CF500	WPADInit	called by KPADInitEx; before WPADGetRadioSensitivity (Dolphin's), at the head of WPAD.c
+801D0C00	WPADDisconnect	between WPADGetRadioSensitivity and WPADProbe (Dolphin's); called by strat_WiiDisconnectController and the HOME Button menu
+801D1040	WPADGetInfoAsync	between WPADProbe and WPADControlMotor (Dolphin's); called by strat_WiiCheckBatteryAsync and the HOME Button menu
+801D0E70	WPADSetExtensionCallback	between WPADProbe and WPADControlMotor (Dolphin's): (chan, callback) stored per channel; the HOME Button menu's controllers set it
+801D1650	WPADRead	after WPADSaveConfig (Dolphin's): a channel's latest status copied out of WPAD's ring; called by KPAD's sampling callback
+801D16F0	WPADSetAutoSamplingBuf	follows WPADRead: a channel's sampling ring set under OSDisableInterrupts; called by WPAD's connection callback
+801D1AC0	WPADControlSpeaker	the speaker's on, off, mute and play commands (0x15FC bytes, the command sequences inlined); called by the HOME Button menu's speaker code
+801D3100	WPADSetSpeakerVolume	clamps its argument to 0..0x7F and stores it in one global byte between OSDisableInterrupts and OSRestoreInterrupts
+801D3320	WPADSendStreamData	follows WPADCanSendStreamData (Dolphin's) and calls IsBusyStream (Dolphin's); 0x210 bytes; hooked, it carries the Remote speaker's sounds
+80166520	OSSaveContext	signature in Dolphin's database and Victorious's ELF; just before OSLoadContext: stmw of the GPRs, the GQRs (mfspr 913..919), CR, MSR
+801CF5C0	WPADGetRadioSensitivity	signature in Dolphin's database and Victorious's ELF
+801D0CC0	WPADProbe	signature in Dolphin's database and Victorious's ELF
+801D1260	WPADControlMotor	signature in Dolphin's database and Victorious's ELF
+801D1370	WPADIsMotorEnabled	signature in Dolphin's database and Victorious's ELF
+801D15A0	WPADSaveConfig	signature in Dolphin's database and Victorious's ELF
+801D3290	WPADCanSendStreamData	signature in Dolphin's database and Victorious's ELF; just before WPADSendStreamData
