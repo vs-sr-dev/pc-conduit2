@@ -25,7 +25,10 @@ this session. Next here: fog and smoothness, then the mouse made proper.
    in split-screen should be told of the disconnection (the game's
    "reconnect" notice), and the pad come back on the same channel.
 6. The black screen seen once in session 2 (after a save existed, with
-   audio), never again since: watch for it; if it returns,
+   audio): seen again on 2026-09-26, black right after the legal notices
+   in one run of three with `--no-audio`, that one beside another
+   instance of the game (the machine loaded); the next run, the same
+   binary, went on to the title. A race still open: if it returns,
    `CONDUIT2_TRACE=1` shows the streamer's state.
 
 Build as in session 1 (`00-sessions.md`), with the port's hooks:
@@ -44,7 +47,15 @@ R X, F Y, E R, Left Shift L, Tab +, Q -, H Home, arrows the d-pad; the
 mouse's motion the right stick). Esc the pause box (frees the mouse), F12
 a GX trace. Split-screen: `--input keyboard` puts the pads from channel 2.
 
-Housekeeping: wiikit is pushed up to `cb99bf8`; `5a004bf` and `b9db60f`
-are local (audited: no private port named), for the user to push. The
-ports' own commits are local: Conduit 2's whole history; Victorious up to
-`86a676f`; DQS up to `2bb90f2`.
+Housekeeping (2026-09-26, a session of publication only): wiikit is
+pushed up to `6fc2304`; Victorious and DQS are published. This repository
+is prepared for GitHub: the README says where the port stands and how to
+play; `tools/names-manual.tsv` names the 31 hooks that only Victorious's
+ELF or Dolphin's database named, so `names.py` alone (the natives and the
+hand names, no ELF, no signatures) names all 49 at the same addresses;
+that build, recompiled and booted, reaches the title as before.
+`tools/dolphin.py` finds Dolphin on the PATH, through `DOLPHIN` or
+`--dolphin`, not at a local path. Three old commits here pinned wiikit
+SHAs from before its messages were reworded (`1168fd6`, `2733ba3`,
+`2216cd4`); they are to be repointed to their published twins before the
+first push.
