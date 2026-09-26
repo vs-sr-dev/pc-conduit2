@@ -55,7 +55,9 @@ ELF or Dolphin's database named, so `names.py` alone (the natives and the
 hand names, no ELF, no signatures) names all 49 at the same addresses;
 that build, recompiled and booted, reaches the title as before.
 `tools/dolphin.py` finds Dolphin on the PATH, through `DOLPHIN` or
-`--dolphin`, not at a local path. Three old commits here pinned wiikit
-SHAs from before its messages were reworded (`1168fd6`, `2733ba3`,
-`2216cd4`); they are to be repointed to their published twins before the
-first push.
+`--dolphin`, not at a local path (in the whole history). Three old
+commits here pinned wiikit SHAs from before its messages were reworded
+(`1168fd6`, `2733ba3`, `2216cd4`); they were repointed to their published
+twins (the same code) before the first push, and the repository
+published at
+[vs-sr-dev/pc-conduit2](https://github.com/vs-sr-dev/pc-conduit2).
